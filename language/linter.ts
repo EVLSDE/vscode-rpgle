@@ -160,7 +160,10 @@ export default class Linter {
         // Linter checking
         if (ruleCount > 0 && ![skipRules.single, skipRules.singleRules].includes(currentRule)) {
 
-          const currentProcedure = globalScope.procedures.find(proc => lineNumber >= proc.range.start && lineNumber <= proc.range.end);
+          const currentProcedure = globalScope.procedures.find(proc => 
+            lineNumber >= proc.range.start && 
+            lineNumber <= proc.range.end &&
+            data.uri === proc.position.path);
           const currentScope = globalScope.merge(inProcedure && currentProcedure ? currentProcedure.scope : undefined);
 
           // Only fetch the names if we have a rule that requires it. It might be slow.
