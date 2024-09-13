@@ -120,7 +120,11 @@ parser.setTableFetch(async (table: string, aliases = false): Promise<Declaration
 
 	const data = await getObjectData(table);
 
-	return dspffdToRecordFormats(data, aliases);
+	if (data) {
+		return dspffdToRecordFormats(data, aliases);
+	}
+
+	throw 503;
 });
 
 let fetchingInProgress: { [fetchKey: string]: boolean } = {};

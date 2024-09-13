@@ -163,7 +163,11 @@ export default function buildRequestHandlers(client: LanguageClient) {
 
 					return data;
 				}
+			} else {
+				return null;
 			}
+		} else {
+			return null;
 		}
 
 		return [];

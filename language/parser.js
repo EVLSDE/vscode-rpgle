@@ -93,12 +93,17 @@ export default class Parser {
         recordFormats: newDefs
       };
     } catch (e) {
-      // Failed. Don't fetch it again
-      this.tables[existingVersion] = {
-        fetched: now,
-        recordFormats: []
-      };
-      newDefs = [];
+      if (e === 503) {
+        this.tables[existingVersion] = null;
+        return [];
+      } else {
+        // Failed. Don't fetch it again
+        this.tables[existingVersion] = {
+          fetched: now,
+          recordFormats: []
+        };
+        newDefs = [];
+      }
     }
 
     this.tables[existingVersion].fetching = false;
