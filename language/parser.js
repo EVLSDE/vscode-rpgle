@@ -316,6 +316,7 @@ export default class Parser {
                   valuePointer.subItems.forEach((item) => {
                     const newItem = item.clone();
                     newItem.position.line = ds.position.line;
+                    newItem.position.path = ds.position.path;
                     ds.subItems.push(newItem);
                   });
                 }
